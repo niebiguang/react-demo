@@ -4,6 +4,7 @@ import { Layout, Menu, Icon } from 'antd';
 import Table from '../table/Table'
 import List from '../list/List'
 import Calendars from '../calendar/Calendar'
+import Echarts from '../echarts/Echarts'
 
 import {
   Link,
@@ -36,12 +37,15 @@ export default withRouter (class Home extends Component {
     });
   };
   handleClick = (e) => {
+    console.log(e)
     if(e.key == 1) {
       this.props.history.push('/table')
     }else if(e.key == 2) {
       this.props.history.push('/list')
     }else if(e.key == 3) {
       this.props.history.push('/calendar')
+    } else if(e.key == 4) {
+      this.props.history.push('/echarts')
     }
   }
   componentDidMount() {
@@ -62,16 +66,16 @@ export default withRouter (class Home extends Component {
         this.setState({
           defaultSelectedKeys: '3'
         })
-    }
+    } 
   }
   render() {
     console.log(this.state.defaultSelectedKeys)
-    let key = this.state.defaultSelectedKeys ? this.state.defaultSelectedKeys : '1'
+    let keyWord = this.state.defaultSelectedKeys ? this.state.defaultSelectedKeys : '1'
     return (
       <Layout className="container">
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={[key]} onClick={this.handleClick}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={[keyWord]} onClick={this.handleClick}>
             <Menu.Item key="1">
               <Icon type="upload" />
               <span>表格</span>
@@ -83,6 +87,10 @@ export default withRouter (class Home extends Component {
             <Menu.Item key="3">
               <Icon type="upload" />
               <span>日历</span>
+            </Menu.Item>
+            <Menu.Item key="4">
+              <Icon type="upload" />
+              <span>图表</span> 
             </Menu.Item>
           </Menu>
         </Sider>
@@ -100,13 +108,14 @@ export default withRouter (class Home extends Component {
               padding: 24,
               background: '#fff',
               minHeight: 280,
-            }}
+            }}  
           >
             <Switch>
               <Redirect exact from="/" to="/table"></Redirect>
               <Route path="/table" component={Table}></Route>
               <Route path="/list" component={List}></Route>
               <Route path="/calendar" component={Calendars}></Route>
+              <Route path="/echarts" component={Echarts}></Route>
             </Switch>
           </Content>
         </Layout>
