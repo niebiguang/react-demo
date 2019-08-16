@@ -64,39 +64,52 @@ export default class Tables extends Component {
     
     
   }
-  // handleClick = (e) => {
-  //   console.log(e)
-  // }
+  handleClick = (e) => {
+    // let id = 
+    console.log(e)
+  }
   render() {
     const columns = [
       {
         title: '姓名',
         dataIndex: 'name',
         key: 'name',
+        align: 'center'
       },
       {
         title: '年龄',
         dataIndex: 'age',
         key: 'age',
+        align: 'center'
       },
       {
         title: '住址',
         dataIndex: 'address',
         key: 'address',
+        align: 'center'
       },
       {
         title: '操作',
         dataIndex: 'operate',
         key: 'operate',
-        render: (e,text, record, index) => {
-        return <Button type="primary" onClick={(e) => {
-          console.log(e)
-        }}>点击</Button>}
+        align: 'center',
+        render: (record,text,index) => {
+          console.log(record);
+          return (
+            <a href="##" type="primary" onClick={(record) => {
+              console.log(record)
+            }}>点击</a>
+          )
+        }
+          
+          
       }
     ]
     return (
       <div>
         <Table
+          bordered
+          pagination={false}
           dataSource={this.state.dataSource}
           columns={columns}
         ></Table>
